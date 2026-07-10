@@ -1,0 +1,26 @@
+Vou deixar uma ideia do que eu quero de front, podemos ir fazendo aos poucos mas guarde essas informações.
+Entenda que alguns graficos e formas como vou organizar essas finanças estão um pouco confusas na minha 
+cabeça então tente planejar o site de forma que tudo fique organizado da melhor forma possível para que 
+caso mude algo depois seja facil de mudar. A principal dúvida é como relacionar investimentos de sonhos,
+mas para tratar isso deixei reservado um dinheiro para investimenos geral e o restante dos objetivos em 
+renda fixa que é mais seguro. Futuramente em uma versão 2.0 quero que o aplicativo fale quanto eu deveria
+investir em cada setor ou onde por o dinheiro que desejo para o sonho. Portanto a IA tem que ter uma 
+estrategia de investimento solida. Vamos a ideia inicial do front:
+
+Na tela inicial quero seleção de abas finanças e investimenos e quero um resumo dos 2 na tela incial
+Considere colocar os graficos de metas e a realidade, a tabela do valor acumulado de cada sonho 
+e a média de gasto, quero uma opção de ocultar valores com aquele simbolo do olho aberto ou fechado.
+
+Na aba finanças vai estar a lista de todos os gastos do ultimo mes e quanto gastou com cada classe 
+(depois vamos definir melhor quais sao as divisões de gastos)
+Nesta aba quero alguns graficos de pizza com meta e situação atua.
+Quero um grafico com Gastos, Investimentos, Previdencia, Viagem, Sonhos 
+Ao clicar em Sonhos vai abrir outros 2 grafico da divisão de sonhos com o objettivo e o atual e porcenttagem para cada um. 
+Isso deve ser configurado pelo o clinete, cadastrar sonhos e porcentagem para cada um e quanto esta reservado para cada um. 
+O mesmo deve ser feito para viagem. Ao clicar em investimentos ou previdencia ele deve enviar para a seção investimentos
+
+Na aba investimentos vai ter uma tabela superior com os objeivos e cada valor acumulado de cada objetivo
+Vai ter uma abela inferior com a lista de todos os investimentos ativos, e asinformações dele.
+os investimentos terão os informações: Nome, Valor	Objetivo	Corretora	tipo Vencimento 
+o tipo sera dividido em Renda fixa, FII, Ações, Internacional, Cripto
+Alem disso quero exibição de graficos de pizza tipos de investimento, objetivos.

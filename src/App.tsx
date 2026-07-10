@@ -1,5 +1,90 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './services/supabaseClient';
+import {Auth} from './components/Auth';
+import FinancasTab from './components/FinancasTab';
+import { Eye, EyeOff, LayoutDashboard, Wallet, TrendingUp, LogOut } from 'lucide-react';
+
+export default function App() {
+  const [session, setSession] = useState<any>(null);
+  const [abaAtiva, setAbaAtiva] = useState('financas');
+  const [mostrarValores, setMostrarValores] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => setSession(session));
+    supabase.auth.onAuthStateChange((_event, session) => setSession(session));
+  }, []);
+
+  if (!session) return <Auth />;
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-10">
+      
+      {/* CABEÇALHO */}
+      <header className="bg-white shadow-sm px-8 py-4 flex justify-between items-center sticky top-0 z-10">
+        <h1 className="text-2xl font-black text-blue-700 tracking-tight">
+          Patrimônio<span className="text-gray-800">.IA</span>
+        </h1>
+        
+        <div className="flex items-center gap-6">
+          {/* Botão de Ocultar Valores */}
+          <button 
+            onClick={() => setMostrarValores(!mostrarValores)}
+            className="text-gray-400 hover:text-blue-600 transition flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-lg"
+          >
+            {mostrarValores ? <Eye size={20} /> : <EyeOff size={20} />}
+            <span className="text-sm font-medium hidden sm:block">
+              {mostrarValores ? "Ocultar" : "Mostrar"}
+            </span>
+          </button>
+          
+          <button 
+            onClick={() => supabase.auth.signOut()} 
+            className="text-sm text-red-500 hover:text-red-700 flex items-center gap-1 font-medium"
+          >
+            <LogOut size={16} /> Sair
+          </button>
+        </div>
+      </header>
+
+      {/* NAVEGAÇÃO DE ABAS */}
+      <nav className="flex justify-center bg-white border-b border-gray-200 shadow-sm mb-8">
+        <button onClick={() => setAbaAtiva('inicial')} className={`flex items-center gap-2 px-8 py-4 font-semibold transition ${abaAtiva === 'inicial' ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/30' : 'text-gray-400 hover:text-blue-500'}`}>
+          <LayoutDashboard size={20} /> Resumo
+        </button>
+        <button onClick={() => setAbaAtiva('financas')} className={`flex items-center gap-2 px-8 py-4 font-semibold transition ${abaAtiva === 'financas' ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/30' : 'text-gray-400 hover:text-blue-500'}`}>
+          <Wallet size={20} /> Finanças
+        </button>
+        <button onClick={() => setAbaAtiva('investimentos')} className={`flex items-center gap-2 px-8 py-4 font-semibold transition ${abaAtiva === 'investimentos' ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/30' : 'text-gray-400 hover:text-blue-500'}`}>
+          <TrendingUp size={20} /> Investimentos
+        </button>
+      </nav>
+
+      {/* ÁREA DE CONTEÚDO */}
+      <main className="max-w-6xl mx-auto px-6">
+        {abaAtiva === 'inicial' && (
+          <div className="text-center py-20 text-gray-500">
+            <h2 className="text-2xl font-bold mb-2">Visão Geral (Em breve)</h2>
+            <p>Aqui ficarão os gráficos de Metas vs Realidade.</p>
+          </div>
+        )}
+        
+        {abaAtiva === 'financas' && (
+          <FinancasTab mostrarValores={mostrarValores} />
+        )}
+        
+        {abaAtiva === 'investimentos' && (
+          <div className="text-center py-20 text-gray-500">
+            <h2 className="text-2xl font-bold mb-2">Investimentos e Sonhos (Em breve)</h2>
+            <p>Aqui ficará a tabela de ativos (Renda Fixa, FIIs, etc) e os objetivos.</p>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+/*
+import { useState, useEffect } from 'react';
+import { supabase } from './services/supabaseClient';
 import { deslogarUsuario } from './services/authService';
 import { Auth } from './components/Auth';
 import { salvarTransacoesNoSupabase } from './services/financasService';
@@ -182,4 +267,4 @@ export default function App() {
       </div>
     </div>
   );
-}
+}*/
